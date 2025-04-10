@@ -1,5 +1,3 @@
-# core/market_simulator.py
-
 import numpy as np
 
 def generate_price_series(start_price=100, periods=12, volatility=0.05, seed=None):
