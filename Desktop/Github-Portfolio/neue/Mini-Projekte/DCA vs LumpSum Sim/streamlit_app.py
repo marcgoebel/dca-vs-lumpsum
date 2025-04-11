@@ -54,3 +54,21 @@ colors = ["green" if ls["final_value"] > dca["final_value"] else "blue", "blue"]
 ax.bar(results_df["Strategy"], results_df["Final Value"], color=colors)
 ax.set_ylabel("Final Value (€)")
 st.pyplot(fig)
+
+# Vergleichstabelle anzeigen
+st.subheader("📋 Strategy Comparison Table")
+
+st.table(pd.DataFrame([
+    {
+        "Strategy": ls["strategy"],
+        "Initial Investment": ls["initial_investment"],
+        "Shares Bought": round(ls["shares_bought"], 2),
+        "Final Value": round(ls["final_value"], 2),
+    },
+    {
+        "Strategy": dca["strategy"],
+        "Initial Investment": dca["initial_investment"],
+        "Shares Bought": round(dca["shares_bought"], 2),
+        "Final Value": round(dca["final_value"], 2),
+    }
+]))
