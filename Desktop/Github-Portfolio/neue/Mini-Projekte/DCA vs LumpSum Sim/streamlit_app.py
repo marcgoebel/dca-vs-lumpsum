@@ -15,7 +15,8 @@ periods = st.slider("📆 Number of Periods (Months)", min_value=3, max_value=24
 volatility = st.slider("📉 Market Volatility", min_value=0.01, max_value=0.1, value=0.05)
 
 # Simulate price series
-prices = generate_price_series(start_price=100, periods=periods, volatility=volatility, seed=42)
+start_price = st.number_input("📌 Start Price of Asset", value=100)
+prices = generate_price_series(start_price=start_price, periods=periods, volatility=volatility, seed=42)
 st.line_chart(prices)
 
 # Run simulations
