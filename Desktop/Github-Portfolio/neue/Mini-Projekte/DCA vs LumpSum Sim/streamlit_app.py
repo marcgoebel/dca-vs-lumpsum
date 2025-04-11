@@ -4,6 +4,7 @@ import streamlit as st
 from core.market_simulator import generate_price_series
 from core.strategies import simulate_lump_sum, simulate_dca
 import matplotlib.pyplot as plt
+import pandas as pd
 
 st.set_page_config(page_title="DCA vs Lump Sum Simulator", layout="centered")
 
@@ -30,6 +31,26 @@ st.write("**DCA Final Value:**", round(dca["final_value"], 2))
 
 # Plot comparison
 fig, ax = plt.subplots()
-ax.bar(["Lump Sum", "DCA"], [ls["final_value"], dca["final_value"]])
+import pandas as pd
+
+# Ergebnisvergleich in DataFrame
+results_df = pd.DataFrame({
+    "Strategy": ["Lump Sum", "DCA"],
+    "Final Value": [ls["final_value"], dca["final_value"]]
+})
+
+# Prozentdifferenz
+diff = round(((ls["final_value"] - dca["final_value"]) / dca["final_value"]) * 100, 2)
+if diff > 0:
+    st.success(f"📈 Lump Sum performed better by **{diff}%**")
+elif diff < 0:
+    st.success(f"📈 DCA performed better by **{abs(diff)}%**")
+else:
+    st.info("⚖️ Both strategies ended with the same value.")
+
+# Plot mit Farben
+fig, ax = plt.subplots()
+colors = ["green" if ls["final_value"] > dca["final_value"] else "blue", "blue"]
+ax.bar(results_df["Strategy"], results_df["Final Value"], color=colors)
 ax.set_ylabel("Final Value (€)")
 st.pyplot(fig)
