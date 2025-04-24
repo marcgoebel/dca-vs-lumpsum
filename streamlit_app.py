@@ -10,6 +10,7 @@ from core.strategies import simulate_lump_sum, simulate_dca
 import matplotlib.pyplot as plt
 import pandas as pd
 
+st.set_page_config(page_title="DCA vs Lump Sum Simulator", layout="centered")
 def run_multiple_simulations(n_runs, investment, start_price, periods, volatility):
     results = {"lump_sum": [], "dca": []}
 
@@ -29,7 +30,6 @@ def run_multiple_simulations(n_runs, investment, start_price, periods, volatilit
 
 seed_input = st.number_input("🧪 Random Seed (optional)", min_value=0, value=42)
 
-st.set_page_config(page_title="DCA vs Lump Sum Simulator", layout="centered")
 
 st.title("💸 DCA vs Lump Sum Investment Simulator")
 
